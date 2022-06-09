@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e7a1658a-0c6f-427a-a498-744858f397b8" name="rpi">
+        <fileTransfer accessType="SFTP" host="192.168.137.52" port="22" sshConfigId="466fd629-50f1-4e38-8f60-043a072c308e" sshConfig="greppel@192.168.137.52:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

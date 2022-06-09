@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="rpi" deleteMissingItems="true" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="rpi">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/greppel/Desktop/WindowsPython" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
