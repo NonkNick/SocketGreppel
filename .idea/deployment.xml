@@ -5,7 +5,7 @@
       <paths name="rpi">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/greppel/Desktop/WindowsPython" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/kubuntu/Desktop/Socket/SocketGreppel" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

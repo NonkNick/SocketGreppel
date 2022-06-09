@@ -28,6 +28,10 @@ class SocketConnector:
         self.dc2 = readStringFromPipe(fd_read)
         self.dc3 = readStringFromPipe(fd_read)
         self.dc4 = readStringFromPipe(fd_read)
+        print(self.dc1)
+        print(self.dc2)
+        print(self.dc3)
+        print(self.dc4)
 
     def close(self):
         os.close(fd_read)
@@ -78,11 +82,11 @@ def readStringFromPipe(fd: object) -> str:
     # first,  read the length of the pipeline
     nrOfBytes = readPrefixFromPipe(fd)
 
-    print(nrOfBytes)
+
 
     # read the bytes
     result = os.read(fd, nrOfBytes).decode()
-
+    print(result)
     return result
 
     #  readStringFromPipe()
