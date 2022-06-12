@@ -12,7 +12,7 @@ path_read = "/tmp/greppel_out"
 path_write = "/tmp/greppel_in"
 
 fd_read = os.open(path_read, os.O_RDONLY)
-fd_write = os.open(path_write, os.O_WRONL)
+fd_write = os.open(path_write, os.O_WRONLY)
 
 
 class SocketConnector:
