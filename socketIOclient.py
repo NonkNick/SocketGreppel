@@ -5,14 +5,11 @@ import cv2
 from greppelState import greppelState
 import base64
 
-cam = cv2.VideoCapture('/dev/video0')  # LINUX
+# cam = cv2.VideoCapture('/dev/video0')  # LINUX
 # cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # Windows
 sio = socketio.AsyncClient()
 encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 40]
-state = greppelState(
-    temp=69,
-    num=30
-)
+state = greppelState()
 
 
 @sio.event
@@ -35,7 +32,7 @@ async def background_task():
             await send_state()
             await send_cam()
             # await send_state()
-            await asyncio.sleep(0.2)
+            await asyncio.sleep(0.1)
     except Exception as e:
         print(e)
 
@@ -44,13 +41,14 @@ async def background_task():
 async def send_state():
     state.getState()
 
-    dummydata = json.dumps(state.__dict__)
+    dummydata = state.getJson()
     await sio.emit("greppelstate", dummydata)
 
 
 # Verstuurd een camera frame naar de website
 async def send_cam():
-    status, frame = cam.read()
+    # status, frame = cam.read()
+    frame = cv2.imread('test2.png')
 
     # rescale image to send
     scale_percent = 100  # percent of original size
@@ -69,14 +67,14 @@ async def send_cam():
 @sio.event
 async def disconnect():
     print('disconnected from server')
-    cam.release()
+    # cam.release()
     cv2.destroyAllWindows()
 
 
 async def main():
     await sio.connect('http://greppel.tech:3000')
     await sio.wait()
-    cam.release()
+    # cam.release()
     cv2.destroyAllWindows()
 
 

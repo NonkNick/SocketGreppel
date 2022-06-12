@@ -10,47 +10,28 @@ measured transfer times: 1.9GB in 2945ms (1853882368 / 2945 = 629501 bytes/ms (@
 # indicate the absolute locations of the pipe (notice that the OUT-pipe is used for reading in this program)
 path_read = "/tmp/greppel_out"
 path_write = "/tmp/greppel_in"
-fd_read = 0
-fd_write = 0
+
+fd_read = os.open(path_read, os.O_RDONLY)
+fd_write = os.open(path_write, os.O_WRONL)
 
 
 class SocketConnector:
     def __init__(self):
         self.json = ""
 
-
     def getState(self):
-        open()
-        print("IN GREPPEL STATE")
-        self.json = readStringFromPipe(self.fd_read)
-        print("tyfustering")
-        print("Na read")
+        self.json = readStringFromPipe(fd_read)
+
         print(self.json)
         # Return an answer
-        writeStringToPipe(self.fd_write, "OKE")
-        close()
-
-    def getJson(self):
-        return self.json
-
-    def getdc1(self):
-        return self.dc1
-
-    def getdc2(self):
-        return self.dc2
-
-    def getdc3(self):
-        return self.dc3
-
-    def getdc4(self):
-        return self.dc4
-
+        writeStringToPipe(fd_write, "OKE")
 
 
 def open():
     # Open a pipe for reading and writing
     fd_read = os.open(path_read, os.O_RDONLY)
     fd_write = os.open(path_write, os.O_WRONLY)
+
 
 def close():
     os.close(fd_read)
@@ -75,6 +56,8 @@ def readPrefixFromPipe(fd: object) -> int:
     nrOfBytes = int("0x" + hexlen, 0)
 
     return nrOfBytes
+
+
 # readPrefixFromPipe()
 
 
@@ -92,6 +75,8 @@ def readStringFromPipe(fd: object) -> str:
     result = os.read(fd, nrOfBytes).decode()
     print(result)
     return result
+
+
 #  readStringFromPipe()
 
 def writeStringToPipe(fd: object, text: str) -> int:
@@ -101,7 +86,7 @@ def writeStringToPipe(fd: object, text: str) -> int:
     :param fd:
     :param text:
     """
-    #determine how much to send
+    # determine how much to send
     nrOfBytes = len(text)
 
     # convert length to hex string
@@ -112,7 +97,7 @@ def writeStringToPipe(fd: object, text: str) -> int:
 
     # encode strings to byte-array
     hexlenBytes = str.encode(hexlen)
-    textBytes   = str.encode(text)
+    textBytes = str.encode(text)
 
     # write to the pipe; first the prefix then the actual string.
     os.write(fd_write, hexlenBytes)
