@@ -1,4 +1,5 @@
 import os
+import fcntl
 
 PREFIX_LENGTH = 8
 FILE_BUFFER_SIZE = 2048
@@ -18,15 +19,22 @@ fd_write = os.open(path_write, os.O_WRONLY)
 class SocketConnector:
     def __init__(self):
         self.json = ""
+        self.xCoord = "None"
 
     def getState(self):
-        self.json = readStringFromPipe(fd_read)
+        try:
+            print(self.xCoord)
+            self.json = readStringFromPipe(fd_read)
+            writeStringToPipe(fd_write, self.xCoord)
+            self.xCoord = "None"
+        except:
+            print("lmao")
 
-        print(self.json)
-        # Return an answer
-        writeStringToPipe(fd_write, "OKE")
+    def getJson(self):
+        return self.json
 
-
+    def setXCoord(self, xcoord):
+        self.xCoord = xcoord
 def open():
     # Open a pipe for reading and writing
     fd_read = os.open(path_read, os.O_RDONLY)
